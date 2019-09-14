@@ -5,8 +5,6 @@ class Config(object):
     """
       Common configs
     """
-
-    SQLALCHEMY_DATABASE_URI = 'sqlite3:///:memory:'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class DevelopmentConfig(Config):
