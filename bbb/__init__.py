@@ -15,13 +15,13 @@ def create_app(config_name):
 
     from bbb import models
     
-    from bbb.views import home as home_blueprint
+    from bbb.views.home import home as home_blueprint
     app.register_blueprint(home_blueprint)
-    from bbb.views import admin as admin_blueprint
+    from bbb.views.admin import admin as admin_blueprint
     app.register_blueprint(admin_blueprint, url_prefix='/admin')
-    from bbb.views import genus as genus_blueprint
+    from bbb.views.genus import genus as genus_blueprint
     app.register_blueprint(genus_blueprint)
-    from bbb.views import species as species_blueprint
+    from bbb.views.species import species as species_blueprint
     app.register_blueprint(species_blueprint)
 
     return app
