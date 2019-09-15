@@ -15,6 +15,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     TESTING = True
     SQLALCHEMY_ECHO = True
+    SECRET = 'mysecret'
 
 
 class ProductionConfig(Config):
