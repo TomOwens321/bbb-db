@@ -10,3 +10,11 @@ def test_add_plant():
     assert p1.genus.name == 'Greenus'
     assert p1.species.name == 'plantus'
     assert len(g1.plants) == 1
+
+def test_description():
+    p1 = Flora(desc='SCF')
+    assert p1.desc == 'SCF'
+
+def test_germination_code():
+    p1 = Flora(germination_code='wet')
+    assert p1.germination_code == 'wet'

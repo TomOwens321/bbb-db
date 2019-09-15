@@ -12,6 +12,7 @@ class Flora(db.Model):
     genus       = db.relationship("Genus")
     species_id  = db.Column(db.Integer, db.ForeignKey('species.id'))
     species     = db.relationship("Species")
+    germination_code = db.Column(db.String)
 
     def __repr__(self):
         return "<Plant:{} {}>".format(self.genus.name,self.species.name)
