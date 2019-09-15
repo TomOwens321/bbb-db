@@ -14,5 +14,14 @@ def create_app(config_name):
     migrate = Migrate(app, db)
 
     from bbb import models
+    
+    from bbb.views import home as home_blueprint
+    app.register_blueprint(home_blueprint)
+    from bbb.views import admin as admin_blueprint
+    app.register_blueprint(admin_blueprint, url_prefix='/admin')
+    from bbb.views import genus as genus_blueprint
+    app.register_blueprint(genus_blueprint)
+    from bbb.views import species as species_blueprint
+    app.register_blueprint(species_blueprint)
 
     return app
