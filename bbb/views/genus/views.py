@@ -1,9 +1,9 @@
 from flask import render_template
 from . import genus
 from bbb.models.genus import Genus
-from ... import db
+from bbb import db
 
 @genus.route('/genus')
 def list_genus():
-    list = Genus.query.all()
-    return render_template('genus/genus.html', genus=list)
+    all_genus = db.session.query(Genus).all()
+    return render_template('genus/genus.html', items=all_genus)

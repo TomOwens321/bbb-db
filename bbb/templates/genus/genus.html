@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Genus{% endblock %}
 {% block body %}
+<h2>Genus</h2>
   <table>
       <tr>
           <th>Genus</th>
           <th>Description</th>
       </tr>
-      {% for item in genus %}
-          <tr>{{ item.name }}</tr>
-          <tr>{{ item.desc }}</tr>
+      {% for item in items %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.desc }}</td>
+        </tr>
       {% endfor %}
   </table>
+{% endblock %}
