@@ -9,12 +9,14 @@
         <tr>
             <th>Genus</th>
             <th>Species</th>
+            <th>Common Name</th>
             <th>Description</th>
         </tr>
         {% for item in items %}
         <tr>
             <td>{{ item.genus.name }}</td>
             <td>{{ item.species.name }}</td>
+            <td>{{ item.common_name }}</td>
             <td>{{ item.desc }}</td>
         </tr>
         {% endfor %}
