@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+<div id=big-title>
+    <h2>Listing Plants</h2>
+</div>
+
+<div>
+    <table>
+        <tr>
+            <th>Genus</th>
+            <th>Species</th>
+            <th>Description</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.genus.name }}</td>
+            <td>{{ item.species.name }}</td>
+            <td>{{ item.desc }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
