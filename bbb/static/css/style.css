@@ -106,3 +106,7 @@ p.copyright {
   height: 100%;
   margin: 0 auto -4em;
 }
+
+.wrapper th, td {
+    padding-left: 14px;
+}

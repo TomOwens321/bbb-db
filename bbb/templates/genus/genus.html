@@ -6,11 +6,15 @@
       <tr>
           <th>Genus</th>
           <th>Description</th>
+          <th>Actions</th>
       </tr>
       {% for item in items %}
         <tr>
           <td>{{ item.name }}</td>
           <td>{{ item.desc }}</td>
+          <td><a href="/genus/edit/{{ item.id }}">Edit</a>
+              <a href="/genus/show/{{ item.id }}">Show</a>
+          </td>
         </tr>
       {% endfor %}
   </table>
