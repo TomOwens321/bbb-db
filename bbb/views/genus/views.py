@@ -56,4 +56,4 @@ def show_genus(id):
     print("ID: {}".format(id))
     qry = db.session.query(Genus).filter(Genus.id == id)
     item = qry.first()
-    return render_template('genus/show.html', item=item)
+    return render_template('genus/show.html', item=item, plants=item.plants, bugs=item.bugs)

@@ -15,4 +15,20 @@
         </tr>
     </table>
 </div>
+{% if item.plants %}
+    <div id="plants">
+        <h3>Plants with Genus {{ item.name }}</h3>
+        {% for plant in plants %}
+        {{ plant }}<br/>
+        {% endfor %}
+    </div>
+{% endif %}
+{% if item.bugs %}
+    <div id="bugs">
+        <h3>Bugss with Genus {{ item.name }}</h3>
+        {% for bug in bugs %}
+        {{ bug }}<br/>
+        {% endfor %}
+    </div>
+{% endif %}
 {% endblock %}
