@@ -1,5 +1,5 @@
 from flask import render_template, flash, request
-from bbb.models.flora import Flora
+from bbb.models import Flora, Genus, Species
 from bbb import db
 from . import flora
 

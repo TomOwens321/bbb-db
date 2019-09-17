@@ -17,8 +17,11 @@
 </div>
 {% if item.plants %}
     <div id="plants">
+        <div>
+            <h3>Plants with genus {{ item.name }}</h3>
+        </div>
         {% with items=item.plants %}
-            {% include "flora/flora.html" %}
+            {% include "flora/_flora.html" %}
         {% endwith %}
     </div>
 {% endif %}

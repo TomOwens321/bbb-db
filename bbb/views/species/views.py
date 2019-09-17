@@ -1,7 +1,7 @@
 from flask import render_template, flash, request
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from . import species
-from bbb.models.species import Species
+from bbb.models import Species
 from bbb import db
 
 @species.route('/species')

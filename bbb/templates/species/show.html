@@ -17,10 +17,12 @@
 </div>
 {% if item.plants %}
     <div id="plants">
-        <h3>Plants with Species {{ item.name }}</h3>
-        {% for plant in plants %}
-        {{ plant }}<br/>
-        {% endfor %}
+        <div>
+            <h3>Plants with species {{ item.name }}</h3>
+        </div>
+        {% with items=item.plants %}
+            {% include "flora/_flora.html" %}
+        {% endwith %}
     </div>
 {% endif %}
 {% if item.bugs %}
