@@ -25,5 +25,7 @@ def create_app(config_name):
     app.register_blueprint(species_blueprint)
     from bbb.views.flora import flora as flora_blueprint
     app.register_blueprint(flora_blueprint)
+    from bbb.views.fauna import fauna as fauna_blueprint
+    app.register_blueprint(fauna_blueprint)
 
     return app
