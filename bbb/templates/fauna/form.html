@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block body %}
+  {% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+        <li>{{ message[1] }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+  <div class=form>
+        <form action="" method="post">
+            <div>
+                <table>
+                    <tr>
+                        <td>{{ form.genus.label }}</td>
+                        <td>{{ form.genus(list="g_datalist") }}
+                            <datalist id="g_datalist">
+                                {% for item in gl %}
+                                <option value={{ item }}>{{ item }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.species.label }}</td>
+                        <td>{{ form.species(list="s_datalist") }}
+                            <datalist id="s_datalist">
+                                {% for item in sl %}
+                                    <option value={{ item }}>{{ item }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.common_name.label }}</td>
+                        <td>{{ form.common_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.desc.label }}</td>
+                        <td>{{ form.desc }}</td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Submit"></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+{% endblock %}

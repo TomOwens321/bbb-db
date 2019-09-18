@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+    <div id=big-title>
+        <h2>Listing Bugs</h2>
+    </div>
+    {% with items=items %}
+        {% include "fauna/_fauna.html" %}
+    {% endwith %}
+{% endblock %}

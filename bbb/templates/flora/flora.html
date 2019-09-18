@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+    <div id=big-title>
+        <h2>Listing Plants</h2>
+    </div>
+    {% with items=items %}
+        {% include "flora/_flora.html" %}
+    {% endwith %}
+{% endblock %}
