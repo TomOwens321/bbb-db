@@ -16,6 +16,8 @@ class DevelopmentConfig(Config):
     TESTING = True
     SQLALCHEMY_ECHO = True
     SECRET = 'mysecret'
+    SQLALCHEMY_DATABASE_URI='sqlite:///bbb/db/dev.sqlite3'
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 
 class ProductionConfig(Config):
