@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Family{% endblock %}
+{% block body %}
+<h2>Family Listing</h2>
+  <table>
+      <tr>
+          <th>Family</th>
+          <th>Description</th>
+          <th>Actions</th>
+      </tr>
+      {% for item in items %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.desc }}</td>
+          <td><a href="/family/edit/{{ item.id }}">Edit</a>
+              <a href="/family/show/{{ item.id }}">Show</a>
+          </td>
+        </tr>
+      {% endfor %}
+  </table>
+{% endblock %}
