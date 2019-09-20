@@ -11,6 +11,8 @@ class Flora(db.Model):
     desc        = db.Column(db.String)
     sub_species = db.Column(db.String)
     variety     = db.Column(db.String)
+    family_id   = db.Column(db.Integer, db.ForeignKey('family.id'))
+    family      = db.relationship("Family")
     genus_id    = db.Column(db.Integer, db.ForeignKey('genus.id'))
     genus       = db.relationship("Genus")
     species_id  = db.Column(db.Integer, db.ForeignKey('species.id'))

@@ -8,6 +8,8 @@ class Fauna(db.Model):
     id          = db.Column(db.Integer, primary_key=True)
     common_name = db.Column(db.String)
     desc        = db.Column(db.String)
+    family_id   = db.Column(db.Integer, db.ForeignKey('family.id'))
+    family      = db.relationship("Family")
     genus_id    = db.Column(db.Integer, db.ForeignKey('genus.id'))
     genus       = db.relationship("Genus")
     species_id  = db.Column(db.Integer, db.ForeignKey('species.id'))
