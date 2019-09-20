@@ -3,3 +3,4 @@ from .species import Species as Species
 from .flora import Flora as Flora
 from .fauna import Fauna as Fauna
 from .family import Family as Family
+from .location import Location as Location
