@@ -9,6 +9,8 @@ class ReusableForm(Form):
     species = StringField('Species: ', validators=[validators.required()])
     common_name = StringField('Common Name: ')
     desc = TextAreaField('Description: ')
+    sub_species = StringField('Sub Species: ')
+    variety = StringField('Variety: ')
     germination_code = StringField('Germination Code: ')
 
 def flat_list(l):
@@ -22,8 +24,8 @@ def _exists(table, value):
         r = table(name=value)
         s.add(r)
         s.commit()
-    s.close()
-    print(r)
+    #s.close()
+    # print(r)
     return r
 
 @flora.route('/flora')
@@ -44,6 +46,8 @@ def new_flora():
         plant.common_name = request.form['common_name']
         plant.desc = request.form['desc']
         plant.germination_code = request.form['germination_code']
+        plant.sub_species = request.form['sub_species']
+        plant.variety = request.form['variety']
 
         if form.validate():
             session = db.session()

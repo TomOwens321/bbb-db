@@ -23,7 +23,7 @@ def _exists(table, value):
         s.add(r)
         s.commit()
     #s.close()
-    print(r)
+    #print(r)
     return r
 
 @fauna.route('/fauna')
