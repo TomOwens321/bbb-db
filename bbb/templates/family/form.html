@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Family{% endblock %}
+{% block body %}
+  {% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+        <li>{{ message[1] }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+  <div class=form>
+  <form action="" method="post">
+      <div>
+          {{ form.name.label }} {{ form.name }}<br/>
+          {{ form.desc.label }} {{ form.desc }}
+      </div>
+      <div>
+          <input type="submit" value="Submit">
+      </div>
+  </form>
+  </div>
+{% endblock %}
