@@ -14,6 +14,16 @@
             <div>
                 <table>
                     <tr>
+                        <td>{{ form.family.label }}</td>
+                        <td>{{ form.family(list="f_datalist") }}
+                            <datalist id="f_datalist">
+                                {% for item in fl %}
+                                    <option value={{ item }}>{{ item }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>{{ form.genus.label }}</td>
                         <td>{{ form.genus(list="g_datalist") }}
                             <datalist id="g_datalist">

@@ -30,7 +30,7 @@ def new_family():
         
         else:
             flash('Unable to save Family')
-    return render_template('family/form.html', form=form)
+    return render_template('common/form2.html', form=form, table='Family')
 
 @family.route('/family/<int:id>/edit/', methods=['GET', 'POST'])
 def edit_family(id):
@@ -49,7 +49,7 @@ def edit_family(id):
         
         else:
             flash('Unable to save Family')
-    return render_template('family/form.html', form=form)
+    return render_template('common/form2.html', form=form, table='Family')
 
 @family.route('/family/<int:id>/')
 def show_family(id):
