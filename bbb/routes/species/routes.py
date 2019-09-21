@@ -30,7 +30,7 @@ def new_species():
         
         else:
             flash('Unable to save Species')
-    return render_template('species/form.html', form=form)
+    return render_template('common/form2.html', form=form, table='Species')
 
 @species.route('/species/<int:id>/edit/', methods=['GET', 'POST'])
 def edit_species(id):
@@ -49,7 +49,7 @@ def edit_species(id):
         
         else:
             flash('Unable to save Species')
-    return render_template('species/form.html', form=form)
+    return render_template('common/form2.html', form=form, table='Species')
 
 @species.route('/species/<int:id>/')
 def show_species(id):

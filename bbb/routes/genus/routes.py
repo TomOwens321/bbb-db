@@ -30,7 +30,7 @@ def new_genus():
         
         else:
             flash('Unable to save Genus')
-    return render_template('genus/form.html', form=form)
+    return render_template('common/form2.html', form=form, table="Genus")
 
 @genus.route('/genus/<int:id>/edit/', methods=['GET', 'POST'])
 def edit_genus(id):
@@ -49,7 +49,7 @@ def edit_genus(id):
         
         else:
             flash('Unable to save Genus')
-    return render_template('genus/form.html', form=form)
+    return render_template('common/form2.html', form=form, table='Genus')
 
 @genus.route('/genus/<int:id>/')
 def show_genus(id):
