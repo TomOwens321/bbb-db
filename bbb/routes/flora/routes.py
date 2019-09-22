@@ -5,9 +5,9 @@ from bbb import db
 from . import flora
 
 class ReusableForm(Form):
-    genus = StringField('Genus: ', validators=[validators.required()])
-    species = StringField('Species: ', validators=[validators.required()])
-    family = StringField('Family: ')
+    genus_name = StringField('Genus: ', validators=[validators.required()])
+    species_name = StringField('Species: ', validators=[validators.required()])
+    family_name = StringField('Family: ')
     common_name = StringField('Common Name: ')
     desc = TextAreaField('Description: ')
     sub_species = StringField('Sub Species: ')
@@ -37,21 +37,18 @@ def list_flora():
 def new_flora(id=None):
     if id:
         plant = db.session.query(Flora).filter(Flora.id==id).first()
-        genus_list = [plant.genus.name]
-        species_list = [plant.species.name]
-        family_list = [plant.family.name]
         form = ReusableForm(request.form, obj=plant)
     else:
         plant = Flora()
-        genus_list = flat_list(db.session.query(Genus.name).all())
-        species_list = flat_list(db.session.query(Species.name).all())
-        family_list = flat_list(db.session.query(Family.name).all())
         form = ReusableForm(request.form)
+    genus_list = flat_list(db.session.query(Genus.name).all())
+    species_list = flat_list(db.session.query(Species.name).all())
+    family_list = flat_list(db.session.query(Family.name).all())
     print(form.errors)
     if request.method == 'POST':
-        plant.genus = request.form['genus']
-        plant.species = request.form['species']
-        plant.family = request.form['family']
+        plant.genus = _exists(Genus, request.form['genus_name'])
+        plant.species = _exists(Species, request.form['species_name'])
+        plant.family = _exists(Family, request.form['family_name'])
         plant.common_name = request.form['common_name']
         plant.desc = request.form['desc']
         plant.germination_code = request.form['germination_code']
@@ -60,12 +57,6 @@ def new_flora(id=None):
 
         if form.validate():
             session = db.session()
-            f = _exists(Family,plant.family)
-            g = _exists(Genus,plant.genus)
-            s = _exists(Species,plant.species)
-            plant.family = f
-            plant.genus = g
-            plant.species = s
             session.add(plant)
             session.commit()
             session.close()
