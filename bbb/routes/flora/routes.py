@@ -33,12 +33,20 @@ def list_flora():
     return render_template("flora/flora.html", items=all_flora)
 
 @flora.route('/flora/new/', methods=['GET', 'POST'])
-def new_flora():
-    plant = Flora()
-    genus_list = flat_list(db.session.query(Genus.name).all())
-    species_list = flat_list(db.session.query(Species.name).all())
-    family_list = flat_list(db.session.query(Family.name).all())
-    form = ReusableForm(request.form)
+@flora.route('/flora/<int:id>/edit/', methods=['GET', 'POST'])
+def new_flora(id=None):
+    if id:
+        plant = db.session.query(Flora).filter(Flora.id==id).first()
+        genus_list = [plant.genus.name]
+        species_list = [plant.species.name]
+        family_list = [plant.family.name]
+        form = ReusableForm(request.form, obj=plant)
+    else:
+        plant = Flora()
+        genus_list = flat_list(db.session.query(Genus.name).all())
+        species_list = flat_list(db.session.query(Species.name).all())
+        family_list = flat_list(db.session.query(Family.name).all())
+        form = ReusableForm(request.form)
     print(form.errors)
     if request.method == 'POST':
         plant.genus = request.form['genus']
