@@ -3,6 +3,7 @@
         <tr>
             <th>Name</th>
             <th>Common Name</th>
+            <th>Family</th>
             <th>Genus</th>
             <th>Species</th>
             <th>Description</th>
@@ -11,6 +12,7 @@
         <tr>
             <td><a href="/flora/{{ item.id }}">{{ item.name }}</a></td>
             <td>{{ item.common_name }}</td>
+            <td><a href="/family/{{ item.family.id }}/">{{ item.family.name }}</a></td>
             <td><a href="/genus/{{ item.genus.id }}">{{ item.genus.name }}</a></td>
             <td><a href="/species/{{ item.species.id }}">{{ item.species.name }}</a></td>
             <td>{{ item.desc }}</td>
