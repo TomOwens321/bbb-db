@@ -28,5 +28,25 @@ class Flora(db.Model):
             name += " var: {}".format(self.variety)
         return name
 
+    @hybrid_property
+    def genus_name(self):
+        if self.genus.name:
+            return self.genus.name
+        else:
+            return None
+    @hybrid_property
+    def species_name(self):
+        if self.species.name:
+            return self.species.name
+        else:
+            return None
+
+    @hybrid_property
+    def family_name(self):
+        if self.family.name:
+            return self.family.name
+        else:
+            return None
+
     def __repr__(self):
         return "<Plant:{} {}>".format(self.genus.name,self.species.name)

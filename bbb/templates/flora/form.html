@@ -14,8 +14,18 @@
             <div>
                 <table>
                     <tr>
-                        <td>{{ form.genus.label }}</td>
-                        <td>{{ form.genus(list="g_datalist") }}
+                        <td>{{ form.family_name.label }}</td>
+                        <td>{{ form.family_name(list="f_datalist") }}
+                            <datalist id="f_datalist">
+                                {% for item in fl %}
+                                    <option value={{ item }}>{{ item }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.genus_name.label }}</td>
+                        <td>{{ form.genus_name(list="g_datalist") }}
                             <datalist id="g_datalist">
                                 {% for item in gl %}
                                 <option value={{ item }}>{{ item }}</option>
@@ -24,8 +34,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>{{ form.species.label }}</td>
-                        <td>{{ form.species(list="s_datalist") }}
+                        <td>{{ form.species_name.label }}</td>
+                        <td>{{ form.species_name(list="s_datalist") }}
                             <datalist id="s_datalist">
                                 {% for item in sl %}
                                     <option value={{ item }}>{{ item }}</option>
