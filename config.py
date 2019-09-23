@@ -5,6 +5,8 @@ class Config(object):
     """
       Common configs
     """
+    SECRET = 'mysecret'
+    SQLALCHEMY_DATABASE_URI='sqlite:///bbb/db/dev.sqlite3'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class DevelopmentConfig(Config):
@@ -15,16 +17,11 @@ class DevelopmentConfig(Config):
     DEBUG = True
     TESTING = True
     SQLALCHEMY_ECHO = True
-    SECRET = 'mysecret'
-    SQLALCHEMY_DATABASE_URI='sqlite:///bbb/db/dev.sqlite3'
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
-
 
 class ProductionConfig(Config):
     """
     Production configurations
     """
-
     DEBUG = False
 
 app_config = {
