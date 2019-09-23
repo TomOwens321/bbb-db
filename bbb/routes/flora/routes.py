@@ -60,7 +60,13 @@ def new_flora(id=None):
             session.add(plant)
             session.commit()
             session.close()
+            flash('Saving Flora')
 
         else:
             flash('Unable to save Flora')
     return render_template('flora/form.html', form=form, gl=genus_list, sl=species_list, fl=family_list)
+
+@flora.route('/flora/<int:id>/')
+def show_flora(id):
+    plant = db.session.query(Flora).filter(Flora.id == id).first()
+    return render_template('flora/show.html', plant=plant)

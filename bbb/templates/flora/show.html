@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block body %}
+<div id="name">
+    <h3>Showing Plant: {{ plant.name }}</h3>
+</div>
+<div id="info">
+    <table>
+        <tr>
+            <th>Name</th>
+            <td>{{ plant.name }}</td>
+        </tr>
+        <tr>
+            <th>Family</th>
+            <td><a href="/family/{{ plant.family.id }}/">{{ plant.family.name }}</a></td>
+        </tr>
+        <tr>
+            <th>Genus</th>
+            <td><a href="/genus/{{ plant.genus.id }}/">{{ plant.genus.name }}</a></td>
+        </tr>
+        <tr>
+            <th>Species</th>
+            <td><a href="/species/{{ plant.species.id }}/">{{ plant.species.name }}</a></td>
+        </tr>
+        <tr>
+            <th>Sub-Species</th>
+            <td>{{ plant.sub_species }}</td>
+        </tr>
+        <tr>
+            <th>Variety</th>
+            <td>{{ plant.variety }}</td>
+        </tr>
+        <tr>
+            <th>Common Name</th>
+            <td>{{ plant.common_name }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ plant.desc }}</td>
+        </tr>
+        <tr>
+            <th>Germination Code</th>
+            <td>{{ plant.germination_code }}</td>
+        </tr>
+    </table>
+</div>
+<div id=plant-nav>
+    <a href="/flora/{{ plant.id }}/edit/">Edit</a>
+    <a href="/flora/">Back</a>
+</div>
+{% endblock %}
