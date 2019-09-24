@@ -1,5 +1,6 @@
 from bbb import db
 from sqlalchemy.ext.hybrid import hybrid_property
+from .relations import PlantBugs
 
 class Flora(db.Model):
     """
@@ -18,6 +19,9 @@ class Flora(db.Model):
     species_id  = db.Column(db.Integer, db.ForeignKey('species.id'))
     species     = db.relationship("Species")
     germination_code = db.Column(db.String)
+    bugs       = db.relationship("Fauna",
+                   secondary="plant_bugs",
+                   back_populates="plants")
 
     @hybrid_property
     def name(self):

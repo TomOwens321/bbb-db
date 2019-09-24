@@ -1,5 +1,6 @@
 from bbb import db
 from sqlalchemy.ext.hybrid import hybrid_property
+from .relations import PlantBugs
 
 class Fauna(db.Model):
     """
@@ -15,6 +16,9 @@ class Fauna(db.Model):
     genus       = db.relationship("Genus")
     species_id  = db.Column(db.Integer, db.ForeignKey('species.id'))
     species     = db.relationship("Species")
+    plants      = db.relationship("Flora",
+                    secondary="plant_bugs",
+                    back_populates="bugs")
 
     @hybrid_property
     def name(self):
