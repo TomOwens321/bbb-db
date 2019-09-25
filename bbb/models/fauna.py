@@ -1,6 +1,5 @@
 from bbb import db
 from sqlalchemy.ext.hybrid import hybrid_property
-from .relations import PlantBugs
 
 class Fauna(db.Model):
     """
