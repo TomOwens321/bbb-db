@@ -1,6 +1,7 @@
 from bbb.models.genus import Genus
 from bbb.models.species import Species
 from bbb.models.fauna import Fauna
+from .test_db_fixtures import one_bug
 
 def test_add_bug():
     g1 = Genus(name='Buzzie')
@@ -12,3 +13,7 @@ def test_add_bug():
     assert b1.species.name == 'beezii'
     assert len(g1.bugs) == 1
     assert len(s1.bugs) == 1
+
+def test_fauna_fixture(one_bug):
+    assert 'Buzzie' in one_bug.name
+    assert 'beezii' in one_bug.name
