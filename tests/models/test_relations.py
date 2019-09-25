@@ -17,5 +17,4 @@ def test_plant_location_relations(one_plant,one_location):
 def test_double_relations(one_plant,one_bug):
     one_plant.bugs.append(one_bug)
     one_bug.plants.append(one_plant)
-    print(one_bug.plants)
     assert len(one_bug.plants) == 2
