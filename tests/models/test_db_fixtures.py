@@ -3,6 +3,7 @@ from bbb.models.genus import Genus
 from bbb.models.species import Species
 from bbb.models.flora import Flora
 from bbb.models.fauna import Fauna
+from bbb.models.location import Location
 
 """
 Create a set of models that other tests may use.
@@ -40,3 +41,8 @@ def one_bug():
     s = Species(name='beezii')
     b = Fauna(genus=g,species=s)
     return b
+
+@pytest.fixture
+def one_location():
+    l = Location(name='Here',lattitude=40.000,longitude=-105.000,altitude=5000)
+    return l
