@@ -1,4 +1,5 @@
 from bbb.models.species import Species
+from .test_db_fixtures import one_species
 
 def test_add_species():
     name = 'speciesone'
@@ -12,3 +13,6 @@ def test_description():
 def test_plants_list():
     s1 = Species()
     assert len(s1.plants) == 0
+
+def test_species_fixture(one_species):
+    assert 'plantus' in one_species.name

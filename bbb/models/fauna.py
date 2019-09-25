@@ -14,6 +14,8 @@ class Fauna(db.Model):
     genus_id    = db.Column(db.Integer, db.ForeignKey('genus.id'))
     genus       = db.relationship("Genus")
     species_id  = db.Column(db.Integer, db.ForeignKey('species.id'))
+    sub_species = db.Column(db.String)
+    variety     = db.Column(db.String)
     species     = db.relationship("Species")
     plants      = db.relationship("Flora",
                     secondary="plant_bugs",

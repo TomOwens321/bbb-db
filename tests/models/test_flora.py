@@ -1,6 +1,7 @@
 from bbb.models.genus import Genus
 from bbb.models.species import Species
 from bbb.models.flora import Flora
+from .test_db_fixtures import one_plant
 
 def test_add_plant():
     g1 = Genus(name='Greenus')
@@ -18,3 +19,8 @@ def test_description():
 def test_germination_code():
     p1 = Flora(germination_code='wet')
     assert p1.germination_code == 'wet'
+
+def test_plant_fixture(one_plant):
+    assert 'Greenus' in one_plant.genus.name
+    assert 'plantus' in one_plant.species.name
+    assert 'Greenus plantus' in one_plant.name
