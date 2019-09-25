@@ -47,4 +47,12 @@
     <a href="/flora/{{ plant.id }}/edit/">Edit</a>
     <a href="/flora/">Back</a>
 </div>
+<div id="known-bugs">
+    {% if plant.bugs %}
+      <p><h3>Bugs associated with {{ plant.name }}</h3></p>
+      {% with items=plant.bugs %}
+        {% include "/fauna/_fauna.html" %}
+      {% endwith %}
+    {% endif %}
+</div>
 {% endblock %}

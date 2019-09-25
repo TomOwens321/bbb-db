@@ -11,7 +11,11 @@ class Location(db.Model):
     state       = db.Column(db.String)
     lattitude   = db.Column(db.Float)
     longitude   = db.Column(db.Float)
+    altitude    = db.Column(db.Integer)
     desc        = db.Column(db.String)
+    plants      = db.relationship("Flora",
+                    secondary="plant_locations",
+                    back_populates="locations")
 
     def __repr__(self):
         return "<Location: {}>".format(self.name)
