@@ -30,11 +30,16 @@ def list_fauna():
     return render_template("fauna/fauna.html", items=all_fauna)
 
 @fauna.route('/fauna/new/', methods=['GET', 'POST'])
-def new_fauna():
-    bug = Fauna()
+@fauna.route('/fauna/<int:id>/edit/', methods=['GET', 'POST'])
+def new_fauna(id=None):
+    if id:
+        bug = db.session.query(Fauna).filter(Fauna.id == id).first()
+        form = ReusableForm(request.form, obj=bug)
+    else:
+        bug = Fauna()
+        form = ReusableForm(request.form)
     genus_list = flat_list(db.session.query(Genus.name).all())
     species_list = flat_list(db.session.query(Species.name).all())
-    form = ReusableForm(request.form)
     print(form.errors)
     if request.method == 'POST':
         bug.genus = request.form['genus']
@@ -55,3 +60,8 @@ def new_fauna():
         else:
             flash('Unable to save Fauna')
     return render_template('fauna/form.html', form=form, gl=genus_list, sl=species_list)
+
+@fauna.route('/fauna/<int:id>/')
+def show_fauna(id=None):
+    fauna = db.session.query(Fauna).filter(Fauna.id == id).first()
+    return render_template('fauna/show.html', fauna=fauna)
