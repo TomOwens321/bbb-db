@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block body %}
+  {% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+        <li>{{ message[1] }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+  <div class="form">
+      <form action="" method="post">
+          <table>
+              <tr>
+                  <th>{{ form.name.label }}</th>
+                  <td>{{ form.name }}</td>
+              </tr>
+              <tr>
+                  <th>{{ form.state.label }}</th>
+                  <td>{{ form.state }}</td>
+              </tr>
+              <tr>
+                  <th>{{ form.city.label }}</th>
+                  <td>{{ form.city }}</td>
+              </tr>
+              <tr>
+                  <th>{{ form.latitude.label }}</th>
+                  <td>{{ form.latitude }}</td>
+              </tr>
+              <tr>
+                  <th>{{ form.longitude.label }}</th>
+                  <td>{{ form.longitude }}</td>
+              </tr>
+              <tr>
+                  <th>{{ form.altitude.label }}</th>
+                  <td>{{ form.altitude }}</td>
+              </tr>
+              <tr>
+                  <th>{{ form.desc.label }}</th>
+                  <td>{{ form.desc }}</td>
+              </tr>
+              <tr>
+                  <td><input type="submit" value="Submit" /></td>
+              </tr>
+          </table>
+      </form>
+  </div>
+  <div>
+      <a href="/location/">Back</a>
+  </div>
+{% endblock %}
