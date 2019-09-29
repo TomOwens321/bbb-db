@@ -45,7 +45,7 @@ def one_bug():
 
 @pytest.fixture
 def one_location():
-    l = Location(name='Here',lattitude=40.000,longitude=-105.000,altitude=5000)
+    l = Location(name='Here',latitude=40.000,longitude=-105.000,altitude=5000)
     return l
 
 @pytest.fixture
