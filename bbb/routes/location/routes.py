@@ -13,7 +13,6 @@ class ReusableForm(Form):
     altitude = DecimalField('Altitude: ')
     desc = TextAreaField('Description: ')
 
-
 @location.route('/location/')
 def list_locations():
     all_locations = db.session.query(Location).all()
@@ -48,3 +47,8 @@ def new_location(id=None):
         else:
             flash('Unable to save Location')
     return render_template('location/form.html', form=form)
+
+@location.route('/location/<int:id>/')
+def show_location(id=None):
+    location = db.session.query(Location).filter(Location.id == id).first()
+    return render_template('location/show.html', location=location)
