@@ -55,4 +55,12 @@
       {% endwith %}
     {% endif %}
 </div>
+<div id="locations">
+    {% if plant.locations %}
+      <p><h3>Locations for {{ plant.name }}</h3></p>
+      {% with items=plant.locations %}
+        {% include "location/_location.html" %}
+      {% endwith %}
+    {% endif %}
+</div>
 {% endblock %}
