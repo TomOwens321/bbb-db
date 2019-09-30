@@ -1,4 +1,4 @@
-from flask import render_template, flash, request
+from flask import render_template, flash, request, redirect
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from bbb.models import Fauna, Genus, Species, Flora
 from bbb import db
@@ -78,5 +78,13 @@ def associate_fauna(id=None):
         else:
             n_plants.append(p)
     if request.method == 'POST':
-        pass
+        plant = db.session.query(Flora).filter(Flora.id == request.form['plant']).first()
+        if request.form['assoc'] == 'associate':
+            bug.plants.append(plant)
+        if request.form['assoc'] == 'dissociate':
+            bug.plants.remove(plant)
+        s = db.session()
+        s.add(bug)
+        s.commit()
+        return redirect("/fauna/{}/association/".format(bug.id))
     return render_template('/fauna/assoc.html', bug=bug, a_plants=a_plants, n_plants=n_plants)

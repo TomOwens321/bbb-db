@@ -5,19 +5,33 @@
 </div>
 <div id="not-associated">
     <p>Not Associated</p>
-    <ul>
+    <form action="" method="post">
+        <table>
         {% for p in n_plants %}
-        <li>{{ p.name }}</li>
+        <tr>
+            <td>{{ p.name }}</td>
+            <td><input type="submit" value="Associate" /></td>
+            <input type="hidden" name="plant" value={{ p.id }} />
+            <input type="hidden" name="assoc" value="associate" />
+        </tr>
         {% endfor %}
-    </ul>
+        </table>
+    </form>
 </div>
 <div id="associated">
     <p>Associated</p>
-    <ul>
+    <form action="" method="post">
+        <table>
         {% for p in a_plants %}
-        <li>{{ p.name }}</li>
+        <tr>
+            <td>{{ p.name }}</td>
+            <td><input type="submit" value="Dissociate" /></td>
+            <input type="hidden" name="plant" value={{ p.id }} />
+            <input type="hidden" name="assoc" value="dissociate" />
+        </tr>
         {% endfor %}
-    </ul>
+        </table>
+    </form>
 </div>
 <div id="nav">
     <a href="/fauna/{{ bug.id }}/">Back</a>
