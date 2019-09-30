@@ -78,10 +78,8 @@ def associate_fauna(id=None):
         else:
             n_plants.append(p)
     if request.method == 'POST':
-        print("Requested {}".format(request.form['plant']))
         plant = db.session.query(Flora).filter(Flora.id == request.form['plant']).first()
         if request.form['assoc'] == 'associate':
-            print("Associating {}".format(plant.id))
             bug.plants.append(plant)
         if request.form['assoc'] == 'dissociate':
             bug.plants.remove(plant)
