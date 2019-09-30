@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body %}
+<div>
+    <h4>Set up associations for {{ bug.name }}</h4>
+</div>
+<div id="not-associated">
+    <p>Not Associated</p>
+    <ul>
+        {% for p in n_plants %}
+        <li>{{ p.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div id="associated">
+    <p>Associated</p>
+    <ul>
+        {% for p in a_plants %}
+        <li>{{ p.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

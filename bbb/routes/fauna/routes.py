@@ -1,6 +1,6 @@
 from flask import render_template, flash, request
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
-from bbb.models import Fauna, Genus, Species, Flora, PlantBugs
+from bbb.models import Fauna, Genus, Species, Flora
 from bbb import db
 from . import fauna
 
@@ -66,9 +66,17 @@ def show_fauna(id=None):
     fauna = db.session.query(Fauna).filter(Fauna.id == id).first()
     return render_template('fauna/show.html', fauna=fauna)
 
-@fauna.route('/fauna/association/')
+@fauna.route('/fauna/<int:id>/association/', methods=['GET', 'POST'])
 def associate_fauna(id=None):
+    a_plants = []
+    n_plants = []
     bug = db.session.query(Fauna).filter(Fauna.id == id).first()
-    plant_list = flat_list(db.session.query(Flora).all())
-    assoc = db.session.query(PlantBugs).filter(PlantBugs.fauna_id == id).all()
-    return render_template('/fauna/assoc.html', bug=bug, plants=plant_list, assoc=assoc)
+    plant_list = db.session.query(Flora).all()
+    for p in plant_list:
+        if p in bug.plants:
+            a_plants.append(p)
+        else:
+            n_plants.append(p)
+    if request.method == 'POST':
+        pass
+    return render_template('/fauna/assoc.html', bug=bug, a_plants=a_plants, n_plants=n_plants)
