@@ -27,5 +27,9 @@ def create_app(config_name):
     app.register_blueprint(fauna_blueprint)
     from bbb.routes.family import family as family_blueprint
     app.register_blueprint(family_blueprint)
+    from bbb.routes.location import location as location_blueprint
+    app.register_blueprint(location_blueprint)
+    from bbb.routes.seed import seed as seed_blueprint
+    app.register_blueprint(seed_blueprint)
 
     return app

@@ -9,7 +9,7 @@ class Location(db.Model):
     name        = db.Column(db.String)
     city        = db.Column(db.String)
     state       = db.Column(db.String)
-    lattitude   = db.Column(db.Float)
+    latitude   = db.Column(db.Float)
     longitude   = db.Column(db.Float)
     altitude    = db.Column(db.Integer)
     desc        = db.Column(db.String)
