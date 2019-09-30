@@ -1,6 +1,6 @@
 from flask import render_template, flash, request
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
-from bbb.models import Fauna, Genus, Species
+from bbb.models import Fauna, Genus, Species, Flora, PlantBugs
 from bbb import db
 from . import fauna
 
@@ -65,3 +65,10 @@ def new_fauna(id=None):
 def show_fauna(id=None):
     fauna = db.session.query(Fauna).filter(Fauna.id == id).first()
     return render_template('fauna/show.html', fauna=fauna)
+
+@fauna.route('/fauna/association/')
+def associate_fauna(id=None):
+    bug = db.session.query(Fauna).filter(Fauna.id == id).first()
+    plant_list = flat_list(db.session.query(Flora).all())
+    assoc = db.session.query(PlantBugs).filter(PlantBugs.fauna_id == id).all()
+    return render_template('/fauna/assoc.html', bug=bug, plants=plant_list, assoc=assoc)
