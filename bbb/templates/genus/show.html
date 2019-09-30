@@ -28,9 +28,9 @@
 {% if item.bugs %}
     <div id="bugs">
         <h3>Bugs with Genus {{ item.name }}</h3>
-        {% for bug in bugs %}
-        {{ bug }}<br/>
-        {% endfor %}
+        {% with items=item.bugs %}
+            {% include "fauna/_fauna.html" %}
+        {% endwith %}
     </div>
 {% endif %}
 {% endblock %}
