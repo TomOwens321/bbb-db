@@ -5,8 +5,8 @@ from bbb import db
 from . import fauna
 
 class ReusableForm(Form):
-    genus = StringField('Genus: ', validators=[validators.required()])
-    species = StringField('Species: ', validators=[validators.required()])
+    genus_name = StringField('Genus: ', validators=[validators.required()])
+    species_name = StringField('Species: ', validators=[validators.required()])
     common_name = StringField('Common Name: ')
     desc = TextAreaField('Description: ')
     germination_code = StringField('Germination Code: ')
@@ -42,8 +42,8 @@ def new_fauna(id=None):
     species_list = flat_list(db.session.query(Species.name).all())
     print(form.errors)
     if request.method == 'POST':
-        bug.genus = request.form['genus']
-        bug.species = request.form['species']
+        bug.genus = _exists(Genus, request.form['genus_name'])
+        bug.species = _exists(Species, request.form['species_name'])
         bug.common_name = request.form['common_name']
         bug.desc = request.form['desc']
 
