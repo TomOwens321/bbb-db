@@ -5,30 +5,34 @@
 </div>
 <div id="not-associated">
     <p>Not Associated</p>
-    <form action="" method="post">
+    
         <table>
         {% for p in n_plants %}
+        <form action="" method="post">
         <tr>
             <td>{{ p.name }}</td>
             <td><input type="submit" value="Associate" /></td>
             <input type="hidden" name="plant" value={{ p.id }} />
             <input type="hidden" name="assoc" value="associate" />
         </tr>
+        </form>
         {% endfor %}
         </table>
-    </form>
+    
 </div>
 <div id="associated">
     <p>Associated</p>
-    <form action="" method="post">
+    
         <table>
         {% for p in a_plants %}
+        <form action="" method="post">
         <tr>
             <td>{{ p.name }}</td>
             <td><input type="submit" value="Dissociate" /></td>
             <input type="hidden" name="plant" value={{ p.id }} />
             <input type="hidden" name="assoc" value="dissociate" />
         </tr>
+        </form>
         {% endfor %}
         </table>
     </form>
