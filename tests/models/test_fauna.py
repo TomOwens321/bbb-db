@@ -3,6 +3,10 @@ from bbb.models.species import Species
 from bbb.models.fauna import Fauna
 from .test_db_fixtures import one_bug
 
+def test_empty_record():
+    b = Fauna()
+    assert "Bug:" in b.__repr__()
+
 def test_add_bug():
     g1 = Genus(name='Buzzie')
     s1 = Species(name='beezii')

@@ -23,12 +23,15 @@ class Fauna(db.Model):
 
     @hybrid_property
     def name(self):
-        name = "{} {}".format(self.genus.name,self.species.name)
-        if self.sub_species:
-            name += " ssp: {}".format(self.sub_species)
-        if self.variety:
-            name += " var: {}".format(self.variety)
-        return name
+        if self.genus and self.species:
+            name = "{} {}".format(self.genus.name,self.species.name)
+            if self.sub_species:
+                name += " ssp: {}".format(self.sub_species)
+            if self.variety:
+                name += " var: {}".format(self.variety)
+            return name
+        else:
+            return None
 
     @hybrid_property
     def genus_name(self):
@@ -51,4 +54,7 @@ class Fauna(db.Model):
             return None
 
     def __repr__(self):
-        return "<Bug:{} {}>".format(self.genus.name,self.species.name)
+        if self.genus and self.species:
+            return "<Bug:{} {}>".format(self.genus.name,self.species.name)
+        else:
+            return "<Bug: None>"

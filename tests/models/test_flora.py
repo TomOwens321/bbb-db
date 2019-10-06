@@ -3,6 +3,10 @@ from bbb.models.species import Species
 from bbb.models.flora import Flora
 from .test_db_fixtures import one_plant
 
+def test_empty_record():
+    f = Flora()
+    assert "Plant:" in f.__repr__()
+
 def test_add_plant():
     g1 = Genus(name='Greenus')
     s1 = Species(name='plantus')
