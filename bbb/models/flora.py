@@ -7,6 +7,7 @@ class Flora(db.Model):
     """
     __tablename__ = 'flora'
     id          = db.Column(db.Integer, primary_key=True)
+    name        = db.Column(db.String)
     common_name = db.Column(db.String)
     desc        = db.Column(db.String)
     sub_species = db.Column(db.String)
@@ -24,18 +25,6 @@ class Flora(db.Model):
     locations   = db.relationship("Location",
                    secondary="plant_locations",
                    back_populates="plants")
-
-    @hybrid_property
-    def name(self):
-        if self.genus and self.species:
-            name = "{} {}".format(self.genus.name,self.species.name)
-            if self.sub_species:
-                name += " ssp: {}".format(self.sub_species)
-            if self.variety:
-                name += " var: {}".format(self.variety)
-            return name
-        else:
-            return None
 
     @hybrid_property
     def genus_name(self):
@@ -58,7 +47,4 @@ class Flora(db.Model):
             return None
 
     def __repr__(self):
-        if self.genus:
-            return "<Plant:{} {}>".format(self.genus.name,self.species.name)
-        else:
-            return "Plant: None>"
+        return "<Plant:{} >".format(self.name)

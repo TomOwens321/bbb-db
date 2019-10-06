@@ -54,7 +54,11 @@ def new_flora(id=None):
         plant.germination_code = request.form['germination_code']
         plant.sub_species = request.form['sub_species']
         plant.variety = request.form['variety']
-
+        plant.name = '{} {}'.format(plant.genus_name,plant.species_name)
+        if plant.sub_species:
+            plant.name += ' ssp:{}'.format(plant.sub_species)
+        if plant.variety:
+            plant.name += ' var:{}'.format(plant.variety)
         if form.validate():
             session = db.session()
             session.add(plant)

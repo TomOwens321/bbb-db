@@ -46,13 +46,10 @@ def new_fauna(id=None):
         bug.species = _exists(Species, request.form['species_name'])
         bug.common_name = request.form['common_name']
         bug.desc = request.form['desc']
+        bug.name = '{} {}'.format(bug.genus_name, bug.species_name)
 
         if form.validate():
             session = db.session()
-            g = _exists(Genus,bug.genus)
-            s = _exists(Species,bug.species)
-            bug.genus = g
-            bug.species = s
             session.add(bug)
             session.commit()
             session.close()

@@ -30,7 +30,7 @@ def one_plant():
     """
     g = Genus(name='Greenus')
     s = Species(name='plantus')
-    p = Flora(genus=g,species=s)
+    p = Flora(genus=g,species=s,name='Greenus plantus')
     return p
 
 @pytest.fixture
@@ -40,7 +40,7 @@ def one_bug():
     """
     g = Genus(name='Buzzie')
     s = Species(name='beezii')
-    b = Fauna(genus=g,species=s)
+    b = Fauna(genus=g,species=s,name='Buzzie beezii')
     return b
 
 @pytest.fixture

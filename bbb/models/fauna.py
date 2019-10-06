@@ -7,6 +7,7 @@ class Fauna(db.Model):
     """
     __tablename__ = 'fauna'
     id          = db.Column(db.Integer, primary_key=True)
+    name        = db.Column(db.String)
     common_name = db.Column(db.String)
     desc        = db.Column(db.String)
     family_id   = db.Column(db.Integer, db.ForeignKey('family.id'))
@@ -20,18 +21,6 @@ class Fauna(db.Model):
     plants      = db.relationship("Flora",
                     secondary="plant_bugs",
                     back_populates="bugs")
-
-    @hybrid_property
-    def name(self):
-        if self.genus and self.species:
-            name = "{} {}".format(self.genus.name,self.species.name)
-            if self.sub_species:
-                name += " ssp: {}".format(self.sub_species)
-            if self.variety:
-                name += " var: {}".format(self.variety)
-            return name
-        else:
-            return None
 
     @hybrid_property
     def genus_name(self):
@@ -54,7 +43,4 @@ class Fauna(db.Model):
             return None
 
     def __repr__(self):
-        if self.genus and self.species:
-            return "<Bug:{} {}>".format(self.genus.name,self.species.name)
-        else:
-            return "<Bug: None>"
+        return "<Bug:{}>".format(self.name)
