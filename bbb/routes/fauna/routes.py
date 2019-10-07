@@ -1,14 +1,17 @@
 from flask import render_template, flash, request, redirect
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
-from bbb.models import Fauna, Genus, Species, Flora
+from bbb.models import Fauna, Genus, Species, Flora, Family
 from bbb import db
 from . import fauna
 
 class ReusableForm(Form):
-    genus_name = StringField('Genus: ', validators=[validators.required()])
+    family_name  = StringField('Family: ')
+    genus_name   = StringField('Genus: ', validators=[validators.required()])
     species_name = StringField('Species: ', validators=[validators.required()])
-    common_name = StringField('Common Name: ')
-    desc = TextAreaField('Description: ')
+    sub_species  = StringField('Sub Species: ')
+    variety      = StringField('Variety: ')
+    common_name  = StringField('Common Name: ')
+    desc         = TextAreaField('Description: ')
     germination_code = StringField('Germination Code: ')
 
 def flat_list(l):
@@ -38,15 +41,23 @@ def new_fauna(id=None):
     else:
         bug = Fauna()
         form = ReusableForm(request.form)
-    genus_list = flat_list(db.session.query(Genus.name).all())
+    family_list  = flat_list(db.session.query(Family.name).all())
+    genus_list   = flat_list(db.session.query(Genus.name).all())
     species_list = flat_list(db.session.query(Species.name).all())
     print(form.errors)
     if request.method == 'POST':
+        bug.family = _exists(Family, request.form['family_name'])
         bug.genus = _exists(Genus, request.form['genus_name'])
         bug.species = _exists(Species, request.form['species_name'])
+        bug.sub_species = request.form['sub_species']
+        bug.variety = request.form['variety']
         bug.common_name = request.form['common_name']
         bug.desc = request.form['desc']
         bug.name = '{} {}'.format(bug.genus_name, bug.species_name)
+        if bug.sub_species:
+            bug.name += ' ssp:{}'.format(bug.sub_species)
+        if bug.variety:
+            bug.name += ' var:{}'.format(bug.variety)
 
         if form.validate():
             session = db.session()
@@ -56,7 +67,7 @@ def new_fauna(id=None):
 
         else:
             flash('Unable to save Fauna')
-    return render_template('fauna/form.html', form=form, gl=genus_list, sl=species_list)
+    return render_template('fauna/form.html', form=form, fl=family_list, gl=genus_list, sl=species_list)
 
 @fauna.route('/fauna/<int:id>/')
 def show_fauna(id=None):
