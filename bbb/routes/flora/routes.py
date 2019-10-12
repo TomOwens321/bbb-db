@@ -3,6 +3,7 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 from bbb.models import Flora, Genus, Species, Family
 from bbb import db
 from . import flora
+from bbb.routes.helpers import _exists, flat_list
 
 class ReusableForm(Form):
     genus_name = StringField('Genus: ', validators=[validators.required()])
@@ -13,19 +14,6 @@ class ReusableForm(Form):
     sub_species = StringField('Sub Species: ')
     variety = StringField('Variety: ')
     germination_code = StringField('Germination Code: ')
-
-def flat_list(l):
-    return ["%s" % v for v in l]
-
-def _exists(table, value):
-    s = db.session()
-    r = s.query(table).filter(table.name==value).first()
-    if not r:
-        print("New record!")
-        r = table(name=value)
-        s.add(r)
-        s.commit()
-    return r
 
 @flora.route('/flora/')
 def list_flora():
