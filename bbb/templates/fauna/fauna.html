@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+    <div>
+        <h2>Listing Bugs</h2>
+    </div>
+    <div>
+        {% with items=items %}
+          {% include "fauna/_fauna.html" %}
+        {% endwith %}
+    </div>
+    <div>
+        <a href="/fauna/new/">New Bug</a>
+    </div>
+{% endblock %}

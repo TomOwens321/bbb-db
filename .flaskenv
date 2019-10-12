@@ -1,0 +1,3 @@
+FLASK_ENV='development'
+FLASK_CONFIG=${FLASK_ENV}
+FLASK_APP=bbb.py

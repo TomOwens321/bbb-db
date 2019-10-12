@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block body %}
+  {% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+        <li>{{ message[1] }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+  <div class=form>
+        <form action="" method="post">
+            <div>
+                <table>
+                    <tr>
+                        <td>{{ form.family_name.label }}</td>
+                        <td>{{ form.family_name(list="f_datalist") }}
+                            <datalist id="f_datalist">
+                                {% for item in fl %}
+                                <option value={{ item }}>{{ item }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.genus_name.label }}</td>
+                        <td>{{ form.genus_name(list="g_datalist") }}
+                            <datalist id="g_datalist">
+                                {% for item in gl %}
+                                <option value={{ item }}>{{ item }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.species_name.label }}</td>
+                        <td>{{ form.species_name(list="s_datalist") }}
+                            <datalist id="s_datalist">
+                                {% for item in sl %}
+                                    <option value={{ item }}>{{ item }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.sub_species.label }}</td>
+                        <td>{{ form.sub_species }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.variety.label }}</td>
+                        <td>{{ form.variety }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.common_name.label }}</td>
+                        <td>{{ form.common_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.desc.label }}</td>
+                        <td>{{ form.desc }}</td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Submit"></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+    <div id="nav">
+        <a href="/fauna/">Back</a>
+    </div>
+{% endblock %}

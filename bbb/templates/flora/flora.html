@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+    <div>
+        <h2>Listing Plants</h2>
+    </div>
+    {% with items=items %}
+        {% include "flora/_flora.html" %}
+    {% endwith %}
+    <div>
+        <p>
+            <a href="/flora/new/">New Plant</a>
+        </p>
+    </div>
+{% endblock %}

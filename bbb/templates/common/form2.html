@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ table }}{% endblock %}
+{% block body %}
+  <div>
+    <h3>{{ table }} Form</h3>
+  </div>
+  {% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+        <li>{{ message[1] }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+  <div class=form>
+  <form action="" method="post">
+      <div>
+        <table>
+          <tr>
+            <td>{{ form.name.label }}</td>
+            <td>{{ form.name }}</td>
+          </tr>
+          <tr>
+            <td>{{ form.desc.label }}</td>
+            <td>{{ form.desc }}</td>
+          </tr>
+          <tr>
+            <td><input type="submit" value="Submit"></td>
+            <td></td>
+          </tr>
+        </table>    
+      </div>
+  </form>
+  </div>
+  <div>
+    <a href="/{{ table.lower() }}/">Back</a>
+  </div>
+{% endblock %}

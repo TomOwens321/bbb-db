@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="table-heading">
+    <h2>Showing Species {{ item.name }}</h2>
+</div>
+<div class="table-show">
+    <table>
+        <tr>
+            <th>Name</th>
+            <td>{{ item.name }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ item.desc }}</td>
+        </tr>
+    </table>
+</div>
+{% if item.plants %}
+    <div id="plants">
+        <div>
+            <h3>Plants with species {{ item.name }}</h3>
+        </div>
+        {% with items=item.plants %}
+            {% include "flora/_flora.html" %}
+        {% endwith %}
+    </div>
+{% endif %}
+{% if item.bugs %}
+    <div id="bugs">
+        <h3>Bugs with Species {{ item.name }}</h3>
+        {% with items=item.bugs %}
+            {% include "fauna/_fauna.html" %}
+        {% endwith %}
+    </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block body %}
+<div id="name">
+    <h3>Showing Bug: {{ fauna.name }}</h3>
+</div>
+<div id="info">
+	<table>
+		<tr>
+			<th>Name</th>
+			<td>{{ fauna.name }}</td>
+		</tr>
+		<tr>
+			<th>Family</th>
+			<td><a href="/family/{{ fauna.family.id }}/">{{ fauna.family.name }}</a></td>
+		</tr>
+		<tr>
+			<th>Genus</th>
+			<td><a href="/genus/{{ fauna.genus.id }}/">{{ fauna.genus.name }}</a></td>
+		</tr>
+		<tr>
+			<th>Species</th>
+			<td><a href="/species/{{ fauna.species.id }}/">{{ fauna.species.name }}</a></td>
+		</tr>
+		<tr>
+			<th>Sub Species</th>
+			<td>{{ fauna.sub_species }}</td>
+		</tr>
+		<tr>
+			<th>Variety</th>
+			<td>{{ fauna.variety }}</td>
+		</tr>
+		<tr>
+			<th>Common Name</th>
+			<td>{{ fauna.common_name }}</td>
+		</tr>
+		<tr>
+			<th>Description</th>
+			<td>{{ fauna.desc }}</td>
+		</tr>
+
+	</table>
+</div>
+<div id="nav">
+	<a href="/fauna/{{ fauna.id }}/edit/">Edit</a>
+	<a href="/fauna/{{ fauna.id }}/association/">Associate</a>
+	<a href="/fauna/">Back</a>
+</div>
+<div id="plants">
+	{% if fauna.plants %}
+	    <h3>{{ fauna.name }} pollinates these plants:</h3>
+	    {% with items=fauna.plants %}
+	        {% include "flora/_flora.html" %}
+	    {% endwith %}
+	{% endif %}
+</div>
+{% endblock %}

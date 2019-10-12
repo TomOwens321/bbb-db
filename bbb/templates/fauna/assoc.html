@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block body %}
+<div>
+    <h4>Set up associations for {{ bug.name }}</h4>
+</div>
+<div id="not-associated">
+    <p>Not Associated</p>
+    
+        <table>
+        {% for p in n_plants %}
+        <form action="" method="post">
+        <tr>
+            <td>{{ p.name }}</td>
+            <td><input type="submit" value="Associate" /></td>
+            <input type="hidden" name="plant" value={{ p.id }} />
+            <input type="hidden" name="assoc" value="associate" />
+        </tr>
+        </form>
+        {% endfor %}
+        </table>
+    
+</div>
+<div id="associated">
+    <p>Associated</p>
+    
+        <table>
+        {% for p in a_plants %}
+        <form action="" method="post">
+        <tr>
+            <td>{{ p.name }}</td>
+            <td><input type="submit" value="Dissociate" /></td>
+            <input type="hidden" name="plant" value={{ p.id }} />
+            <input type="hidden" name="assoc" value="dissociate" />
+        </tr>
+        </form>
+        {% endfor %}
+        </table>
+    </form>
+</div>
+<div id="nav">
+    <a href="/fauna/{{ bug.id }}/">Back</a>
+</div>
+{% endblock %}

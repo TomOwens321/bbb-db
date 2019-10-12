@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Genus{% endblock %}
+{% block body %}
+<h2>Genus Listing</h2>
+  <table>
+      <tr>
+          <th>Genus</th>
+          <th>Description</th>
+          <th>Actions</th>
+      </tr>
+      {% for item in items %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.desc }}</td>
+          <td><a href="/genus/{{ item.id }}/edit/">Edit</a>
+              <a href="/genus/{{ item.id }}/">Show</a>
+          </td>
+        </tr>
+      {% endfor %}
+  </table>
+{% endblock %}

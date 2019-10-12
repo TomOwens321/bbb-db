@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Species{% endblock %}
+{% block body %}
+<h2>Species Listing</h2>
+  <table>
+      <tr>
+          <th>Species</th>
+          <th>Description</th>
+          <th>Actions</th>
+      </tr>
+      {% for item in items %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.desc }}</td>
+          <td><a href="/species/{{ item.id }}/edit/">Edit</a>
+              <a href="/species/{{ item.id }}/">Show</a>
+          </td>
+        </tr>
+      {% endfor %}
+  </table>
+{% endblock %}

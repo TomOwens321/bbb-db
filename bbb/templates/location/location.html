@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+    <div>
+        <h2>Listing Locations</h2>
+    </div>
+    {% with items=items %}
+        {% include "location/_location.html" %}
+    {% endwith %}
+    <div>
+        <p>
+            <a href="/location/new/">New Location</a>
+        </p>
+    </div>
+{% endblock %}

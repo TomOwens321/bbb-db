@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="table-heading">
+    <h2>Showing Family {{ item.name }}</h2>
+</div>
+<div class="table-show">
+    <table>
+        <tr>
+            <th>Name</th>
+            <td>{{ item.name }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ item.desc }}</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <a href="/family/{{ item.id }}/edit/">Edit</a>
+</div>
+{% if item.plants %}
+    <div id="plants">
+        <div>
+            <h3>Plants in Family {{ item.name }}</h3>
+        </div>
+        {% with items=item.plants %}
+            {% include "flora/_flora.html" %}
+        {% endwith %}
+    </div>
+{% endif %}
+{% if item.bugs %}
+    <div id="bugs">
+        <h3>Bugs in Family {{ item.name }}</h3>
+        {% for bug in bugs %}
+        {{ bug }}<br/>
+        {% endfor %}
+    </div>
+{% endif %}
+<div>
+    <a href="/family/">Back</a>
+</div>
+{% endblock %}
