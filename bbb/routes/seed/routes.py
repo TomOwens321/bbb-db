@@ -62,3 +62,8 @@ def new_seed(id=None):
         flash("Saving Seed")
 
     return render_template('seed/form.html', form=form, fl=plant_list, ll=location_list)
+
+@seed.route('/seed/<int:id>/')
+def show_seed(id):
+    seed = db.session.query(Seed).filter(Seed.id==id).first()
+    return render_template('seed/show.html', seed=seed)
