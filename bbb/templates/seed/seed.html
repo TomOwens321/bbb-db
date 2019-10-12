@@ -13,8 +13,8 @@
       {% for item in items %}
         <tr>
           <td>{{ item.collection_lot }}</td>
-          <td>{{ item.flora.name }}</td>
-          <td>{{ item.location.name }}</td>
+          <td><a href="/flora/{{ item.flora_id }}/">{{ item.flora.name }}</a></td>
+          <td><a href="/location/{{ item.location_id }}/">{{ item.location.name }}</a></td>
           <td>{{ item.collection_date }}</td>
           <td><a href="/seed/{{ item.id }}/edit/">Edit</a>
               <a href="/seed/{{ item.id }}/">Show</a>
