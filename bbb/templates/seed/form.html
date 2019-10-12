@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block body %}
+{% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+        <li>{{ message[1] }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+{% endwith %}
+<h3>Seed Form</h3>
+<div class="form">
+    <form action="" method="POST">
+        <table>
+            <tr>
+                <th>{{ form.flora_name.label }}</th>
+                <td>{{ form.flora_name(list="f_datalist") }}
+                    <datalist id="f_datalist">
+                        {% for item in fl %}
+                        <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </datalist>
+                </td>
+            </tr>
+            <tr>
+                <th>{{ form.location_name.label }}</th>
+                <td>{{ form.location_name(list="l_datalist") }}
+                    <datalist id="l_datalist">
+                        {% for item in ll %}
+                        <option value="{{ item }}">{{ item }}</option>
+                        {% endfor %}
+                    </datalist>
+                </td>
+            </tr>
+            <tr>
+                <th>{{ form.collection_date.label }}</th>
+                <td>{{ form.collection_date }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.collection_lot.label }}</th>
+                <td>{{ form.collection_lot }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.quantity.label }}</th>
+                <td>{{ form.quantity }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.uom.label }}</th>
+                <td>{{ form.uom }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.analysis_lot.label }}</th>
+                <td>{{ form.analysis_lot }}</td>
+            </tr>
+            <tr>
+                <th>{{ form.analysis_date.label }}</th>
+                <td>{{ form.analysis_date }}</td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div class="nav">
+    <a href="/seed/">Back</a>
+</div>
+{% endblock %}
