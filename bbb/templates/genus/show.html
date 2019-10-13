@@ -15,6 +15,9 @@
         </tr>
     </table>
 </div>
+<div class="nav">
+	<a href="/genus/{{ item.id }}/edit/">Edit</a>
+</div>
 {% if item.plants %}
     <div id="plants">
         <div>
@@ -33,4 +36,7 @@
         {% endwith %}
     </div>
 {% endif %}
+<div class="nav">
+    <a href="/genus/">Back</a>
+</div>
 {% endblock %}
