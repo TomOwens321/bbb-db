@@ -15,8 +15,9 @@
         </tr>
     </table>
 </div>
-<div>
+<div class="nav">
     <a href="/family/{{ item.id }}/edit/">Edit</a>
+    <a href="/family/">Back</a>
 </div>
 {% if item.plants %}
     <div id="plants">
@@ -36,7 +37,4 @@
         {% include "fauna/_fauna.html" %}
     {% endwith %}
 {% endif %}
-<div>
-    <a href="/family/">Back</a>
-</div>
 {% endblock %}

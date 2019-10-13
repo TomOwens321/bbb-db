@@ -17,6 +17,7 @@
 </div>
 <div class="nav">
     <a href="/species/{{ item.id }}/edit/">Edit</a>
+    <a href="/species/">Back</a>
 </div>
 {% if item.plants %}
     <div id="plants">
@@ -36,7 +37,4 @@
         {% endwith %}
     </div>
 {% endif %}
-<div class="nav">
-    <a href="/species/">Back</a>
-</div>
 {% endblock %}
