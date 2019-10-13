@@ -8,9 +8,9 @@ class ReusableForm(Form):
     name = StringField('Name: ', validators=[validators.DataRequired()])
     state = StringField('State: ')
     city = StringField('City: ')
-    latitude = DecimalField('Latitude: ')
-    longitude = DecimalField('Longitude: ')
-    altitude = DecimalField('Altitude: ')
+    latitude = StringField('Latitude: ')
+    longitude = StringField('Longitude: ')
+    altitude = StringField('Altitude: ')
     desc = TextAreaField('Description: ')
 
 @location.route('/location/')
@@ -32,9 +32,12 @@ def new_location(id=None):
         location.name = request.form['name']
         location.state = request.form['state']
         location.city = request.form['city']
-        location.latitude = request.form['latitude']
-        location.longitude = request.form['longitude']
-        location.altitude = request.form['altitude']
+        if request.form['latitude']:
+            location.latitude = request.form['latitude']
+        if request.form['longitude']:
+            location.longitude = request.form['longitude']
+        if request.form['altitude']:
+            location.altitude = request.form['altitude']
         location.desc = request.form['desc']
 
         if form.validate():
