@@ -54,6 +54,7 @@ def new_flora(id=None):
             session.commit()
             session.close()
             flash('Saving Flora')
+            return list_flora()
 
         else:
             flash('Unable to save Flora')
@@ -63,3 +64,16 @@ def new_flora(id=None):
 def show_flora(id):
     plant = db.session.query(Flora).filter(Flora.id == id).first()
     return render_template('flora/show.html', plant=plant)
+
+@flora.route('/flora/<int:id>/delete/')
+def delete_flora(id):
+    session = db.session()
+    plant = session.query(Flora).filter(Flora.id==id).first()
+    print("Deleting {}".format(plant.name))
+    for l in plant.locations:
+        plant.locations.remove(l)
+    for b in plant.bugs:
+        plant.bugs.remove(b)
+    session.delete(plant)
+    session.commit()
+    return list_flora()
