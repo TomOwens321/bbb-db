@@ -1,9 +1,9 @@
-from flask import render_template, flash, request
+from flask import render_template, flash, request, redirect
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 from bbb.models import Flora, Genus, Species, Family
 from bbb import db
 from . import flora
-from bbb.routes.helpers import _exists, flat_list
+from bbb.routes.helpers import _exists, flat_list, smart_delete
 
 class ReusableForm(Form):
     genus_name = StringField('Genus: ', validators=[validators.required()])
@@ -52,8 +52,8 @@ def new_flora(id=None):
             session = db.session()
             session.add(plant)
             session.commit()
-            session.close()
             flash('Saving Flora')
+            return redirect('/flora/{}/'.format(plant.id))
 
         else:
             flash('Unable to save Flora')
@@ -63,3 +63,9 @@ def new_flora(id=None):
 def show_flora(id):
     plant = db.session.query(Flora).filter(Flora.id == id).first()
     return render_template('flora/show.html', plant=plant)
+
+@flora.route('/flora/<int:id>/delete/')
+def delete_flora(id):
+    plant = db.session.query(Flora).filter(Flora.id==id).first()
+    smart_delete(plant)
+    return redirect('/flora/')

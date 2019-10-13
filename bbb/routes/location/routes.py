@@ -3,6 +3,7 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 from . import location
 from bbb.models import Location, Flora
 from bbb import db
+from bbb.routes.helpers import smart_delete
 
 class ReusableForm(Form):
     name = StringField('Name: ', validators=[validators.DataRequired()])
@@ -78,3 +79,9 @@ def associate_location(id=None):
         s.commit()
         return redirect("/location/{}/association/".format(loc.id))
     return render_template('/location/assoc.html', location=loc, a_plants=a_plants, n_plants=n_plants)
+
+@location.route('/location/<int:id>/delete/')
+def delete_location(id):
+    location = db.session.query(Location).filter(Location.id==id).first()
+    smart_delete(location)
+    return redirect('/location/')

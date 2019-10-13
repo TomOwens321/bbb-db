@@ -3,7 +3,7 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 from bbb.models import Fauna, Genus, Species, Flora, Family
 from bbb import db
 from . import fauna
-from bbb.routes.helpers import _exists, flat_list
+from bbb.routes.helpers import _exists, flat_list, smart_delete
 
 class ReusableForm(Form):
     family_name  = StringField('Family: ')
@@ -85,3 +85,9 @@ def associate_fauna(id=None):
         s.commit()
         return redirect("/fauna/{}/association/".format(bug.id))
     return render_template('/fauna/assoc.html', bug=bug, a_plants=a_plants, n_plants=n_plants)
+
+@fauna.route('/fauna/<int:id>/delete/')
+def delete_flora(id):
+    bug = db.session.query(Fauna).filter(Fauna.id==id).first()
+    smart_delete(bug)
+    return redirect('/fauna/')
