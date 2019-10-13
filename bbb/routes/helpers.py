@@ -14,8 +14,8 @@ def _exists(table, value):
         s.commit()
     return r
 
-def smart_delete(table, record):
-    print("Deleting {} from {}".format(record.name, table))
+def smart_delete(record):
+    print("Deleting {}".format(record.name))
     session = db.session()
     if hasattr(record, 'plants'):
         for p in record.plants:
@@ -26,9 +26,12 @@ def smart_delete(table, record):
     if hasattr(record, 'locations'):
         for l in record.locations:
             record.locations.remove(l)
-    if not (record.genus.plants or record.genus.bugs):
-        session.delete(record.genus)
-    if not (record.species.plants or record.species.bugs):
-        session.delete(record.species)
     session.delete(record)
+    if hasattr(record, 'genus'):
+        if not (record.genus.plants or record.genus.bugs):
+            session.delete(record.genus)
+    if hasattr(record, 'species'):
+        if not (record.species.plants or record.species.bugs):
+            session.delete(record.species)
+    
     session.commit()

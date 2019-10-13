@@ -67,5 +67,5 @@ def show_flora(id):
 @flora.route('/flora/<int:id>/delete/')
 def delete_flora(id):
     plant = db.session.query(Flora).filter(Flora.id==id).first()
-    smart_delete(Flora, plant)
+    smart_delete(plant)
     return redirect('/flora/')
