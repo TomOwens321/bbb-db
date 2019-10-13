@@ -34,7 +34,8 @@ def new_fauna(id=None):
     species_list = flat_list(db.session.query(Species.name).all())
     print(form.errors)
     if request.method == 'POST':
-        bug.family = _exists(Family, request.form['family_name'])
+        if request.form['family_name']:
+            bug.family = _exists(Family, request.form['family_name'])
         bug.genus = _exists(Genus, request.form['genus_name'])
         bug.species = _exists(Species, request.form['species_name'])
         bug.sub_species = request.form['sub_species']
