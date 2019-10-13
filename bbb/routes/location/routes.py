@@ -1,7 +1,7 @@
-from flask import render_template, flash, request
+from flask import render_template, flash, request, redirect
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField, DecimalField
 from . import location
-from bbb.models import Location
+from bbb.models import Location, Flora
 from bbb import db
 
 class ReusableForm(Form):
@@ -55,3 +55,26 @@ def new_location(id=None):
 def show_location(id=None):
     location = db.session.query(Location).filter(Location.id == id).first()
     return render_template('location/show.html', location=location)
+
+@location.route('/location/<int:id>/association/', methods=['GET', 'POST'])
+def associate_location(id=None):
+    a_plants = []
+    n_plants = []
+    loc = db.session.query(Location).filter(Location.id == id).first()
+    plant_list = db.session.query(Flora).all()
+    for p in plant_list:
+        if p in loc.plants:
+            a_plants.append(p)
+        else:
+            n_plants.append(p)
+    if request.method == 'POST':
+        plant = db.session.query(Flora).filter(Flora.id == request.form['plant']).first()
+        if request.form['assoc'] == 'associate':
+            loc.plants.append(plant)
+        if request.form['assoc'] == 'dissociate':
+            loc.plants.remove(plant)
+        s = db.session()
+        s.add(loc)
+        s.commit()
+        return redirect("/location/{}/association/".format(loc.id))
+    return render_template('/location/assoc.html', location=loc, a_plants=a_plants, n_plants=n_plants)
