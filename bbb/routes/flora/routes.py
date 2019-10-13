@@ -36,7 +36,8 @@ def new_flora(id=None):
     if request.method == 'POST':
         plant.genus = _exists(Genus, request.form['genus_name'])
         plant.species = _exists(Species, request.form['species_name'])
-        plant.family = _exists(Family, request.form['family_name'])
+        if request.form['family_name']:
+            plant.family = _exists(Family, request.form['family_name'])
         plant.common_name = request.form['common_name']
         plant.desc = request.form['desc']
         plant.germination_code = request.form['germination_code']
