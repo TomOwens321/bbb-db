@@ -88,6 +88,6 @@ def associate_fauna(id=None):
 
 @fauna.route('/fauna/<int:id>/delete/')
 def delete_flora(id):
-    plant = db.session.query(Fauna).filter(Fauna.id==id).first()
-    smart_delete(plant)
+    bug = db.session.query(Fauna).filter(Fauna.id==id).first()
+    smart_delete(bug)
     return redirect('/fauna/')
