@@ -57,7 +57,7 @@ def new_flora(id=None):
 
         else:
             flash('Unable to save Flora')
-    return render_template('flora/form.html', form=form, gl=genus_list, sl=species_list, fl=family_list)
+    return render_template('flora/form.html', form=form, gl=genus_list, sl=species_list, fl=family_list, name=plant.name)
 
 @flora.route('/flora/<int:id>/')
 def show_flora(id):
