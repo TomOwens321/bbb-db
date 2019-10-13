@@ -9,6 +9,11 @@
   </ul>
   {% endif %}
   {% endwith %}
+  {% if name %}
+    <h3>Editing {{ name }}</h3>
+  {% else %}
+    <h3>New Flora</h3>
+  {% endif %}
   <div class=form>
         <form action="" method="post">
             <div>

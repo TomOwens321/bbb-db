@@ -3,6 +3,7 @@ from wtforms import Form, TextField, TextAreaField, validators, StringField, Sub
 from bbb.models import Flora, Genus, Species, Family
 from bbb import db
 from . import flora
+from bbb.routes.helpers import _exists, flat_list
 
 class ReusableForm(Form):
     genus_name = StringField('Genus: ', validators=[validators.required()])
@@ -13,19 +14,6 @@ class ReusableForm(Form):
     sub_species = StringField('Sub Species: ')
     variety = StringField('Variety: ')
     germination_code = StringField('Germination Code: ')
-
-def flat_list(l):
-    return ["%s" % v for v in l]
-
-def _exists(table, value):
-    s = db.session()
-    r = s.query(table).filter(table.name==value).first()
-    if not r:
-        print("New record!")
-        r = table(name=value)
-        s.add(r)
-        s.commit()
-    return r
 
 @flora.route('/flora/')
 def list_flora():
@@ -48,7 +36,8 @@ def new_flora(id=None):
     if request.method == 'POST':
         plant.genus = _exists(Genus, request.form['genus_name'])
         plant.species = _exists(Species, request.form['species_name'])
-        plant.family = _exists(Family, request.form['family_name'])
+        if request.form['family_name']:
+            plant.family = _exists(Family, request.form['family_name'])
         plant.common_name = request.form['common_name']
         plant.desc = request.form['desc']
         plant.germination_code = request.form['germination_code']
@@ -68,7 +57,7 @@ def new_flora(id=None):
 
         else:
             flash('Unable to save Flora')
-    return render_template('flora/form.html', form=form, gl=genus_list, sl=species_list, fl=family_list)
+    return render_template('flora/form.html', form=form, gl=genus_list, sl=species_list, fl=family_list, name=plant.name)
 
 @flora.route('/flora/<int:id>/')
 def show_flora(id):

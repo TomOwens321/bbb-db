@@ -4,6 +4,7 @@ from . import seed
 from bbb.models import Seed, Flora, Location
 from bbb import db
 from dateutil import parser
+from bbb.routes.helpers import _exists, flat_list
 
 class ReusableForm(Form):
     flora_name = StringField('Plant: ')
@@ -14,19 +15,6 @@ class ReusableForm(Form):
     collection_lot  = StringField('Collection Lot: ')
     analysis_lot    = StringField('Analysis Lot: ')
     analysis_date   = DateField('Analysis Date: ')
-
-def flat_list(l):
-    return ["%s" % v for v in l]
-
-def _exists(table, value):
-    s = db.session()
-    r = s.query(table).filter(table.name==value).first()
-    if not r:
-        print("New record!")
-        r = table(name=value)
-        s.add(r)
-        s.commit()
-    return r
 
 @seed.route('/seed/')
 def list_seeds():
