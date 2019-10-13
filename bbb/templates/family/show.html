@@ -15,8 +15,9 @@
         </tr>
     </table>
 </div>
-<div>
+<div class="nav">
     <a href="/family/{{ item.id }}/edit/">Edit</a>
+    <a href="/family/">Back</a>
 </div>
 {% if item.plants %}
     <div id="plants">
@@ -31,12 +32,9 @@
 {% if item.bugs %}
     <div id="bugs">
         <h3>Bugs in Family {{ item.name }}</h3>
-        {% for bug in bugs %}
-        {{ bug }}<br/>
-        {% endfor %}
     </div>
+    {% with items=item.bugs %}
+        {% include "fauna/_fauna.html" %}
+    {% endwith %}
 {% endif %}
-<div>
-    <a href="/family/">Back</a>
-</div>
 {% endblock %}

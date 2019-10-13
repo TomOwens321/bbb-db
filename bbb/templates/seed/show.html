@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>Showing Seed Lot {{ seed.collection_lot }}</h2>
+<div class="show">
+    <table>
+        <tr>
+            <th>Plant</th>
+            <td>{{ seed.flora.name }}</td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td>{{ seed.location.name }}</td>
+        </tr>
+        <tr>
+            <th>Collection Date</th>
+            <td>{{ seed.collection_date }}</td>
+        </tr>
+        <tr>
+            <th>Collection Lot</th>
+            <td>{{ seed.collection_lot }}</td>
+        </tr>
+        <tr>
+            <th>Quantity</th>
+            <td>{{ seed.quantity }}</td>
+        </tr>
+        <tr>
+            <th>U of M</th>
+            <td>{{ seed.uom }}</td>
+        </tr>
+        <tr>
+            <th>Analysis Lot</th>
+            <td>{{ seed.analysis_lot }}</td>
+        </tr>
+        <tr>
+            <th>Analysis Date</th>
+            <td>{{ seed.analysis_date }}</td>
+        </tr>
+    </table>
+</div>
+<div class="nav">
+    <a href="/seed/{{ seed.id }}/edit/">Edit</a>
+    <a href="/seed/{{ seed.id }}/delete/">Delete</a>
+    <a href="/seed/">Back</a>
+</div>
+{% endblock %}
