@@ -27,6 +27,9 @@ def smart_delete(record):
         for l in record.locations:
             record.locations.remove(l)
     session.delete(record)
+    if hasattr(record, 'family'):
+        if not (record.family.plants or record.family.bugs):
+            session.delete(record.family)
     if hasattr(record, 'genus'):
         if not (record.genus.plants or record.genus.bugs):
             session.delete(record.genus)

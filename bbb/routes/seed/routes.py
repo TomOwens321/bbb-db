@@ -1,10 +1,10 @@
-from flask import render_template, flash, request
+from flask import render_template, flash, request, redirect
 from wtforms import Form, DateField, IntegerField, validators, StringField, SubmitField
 from . import seed
 from bbb.models import Seed, Flora, Location
 from bbb import db
 from dateutil import parser
-from bbb.routes.helpers import _exists, flat_list
+from bbb.routes.helpers import _exists, flat_list, smart_delete
 
 class ReusableForm(Form):
     flora_name = StringField('Plant: ')
@@ -55,3 +55,10 @@ def new_seed(id=None):
 def show_seed(id):
     seed = db.session.query(Seed).filter(Seed.id==id).first()
     return render_template('seed/show.html', seed=seed)
+
+@seed.route('/seed/<int:id>/delete/')
+def delete_seed(id):
+    seed = db.session.query(Seed).filter(Seed.id==id).first()
+    seed.name = "Seed {}".format(seed.flora.name)
+    smart_delete(seed)
+    return redirect('/seed/')
